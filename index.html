@@ -1,222 +1,361 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TUNERACER - Gaming Site</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TUNERACER PRO</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: black;
-            color: white;
-        }
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid red;
-        }
+<style>
 
-        nav h1 {
-            color: red;
-        }
+body{
+    margin:0;
+    font-family:Arial;
+    background:black;
+    color:white;
+    overflow-x:hidden;
+}
 
-        nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: white;
-        }
+/* 🔥 VALORANT BACKGROUND */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,0,60,0.15), transparent 60%);
+    animation: moveBg 15s linear infinite;
+    z-index:-2;
+}
 
-        nav a:hover {
-            color: #ff4d4d;
-        }
+@keyframes moveBg{
+    from{transform:translate(0,0);}
+    to{transform:translate(-50%,-50%);}
+}
 
-        section {
-            padding: 40px 20px;
-            text-align: center;
-        }
+/* PARTICLES */
+#particles-js{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
 
-        #home {
-            padding: 80px 20px;
-            background: linear-gradient(to bottom, black, #111);
-        }
+/* NAV */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #ff003c;
+    position:sticky;
+    top:0;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
 
-        #home h2 {
-            font-size: 40px;
-            color: red;
-        }
+nav h1{
+    color:#ff003c;
+    text-shadow:0 0 15px red;
+}
 
-        button {
-            background: red;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-        }
+.menu a{
+    margin:10px;
+    color:white;
+    text-decoration:none;
+}
+.menu a:hover{
+    color:#ff003c;
+    text-shadow:0 0 10px red;
+}
 
-        button:hover {
-            background: darkred;
-        }
+.hamburger{display:none;cursor:pointer;}
 
-        .card-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+@media(max-width:768px){
+.menu{
+    display:none;
+    flex-direction:column;
+    background:black;
+    position:absolute;
+    top:60px;
+    right:0;
+    width:150px;
+}
+.menu.active{display:flex;}
+.hamburger{display:block;}
+}
 
-        @media(min-width: 768px) {
-            .card-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+/* SECTION */
+section{
+    padding:80px 20px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+section:first-of-type{
+    opacity:1;
+    transform:none;
+}
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
 
-        .card {
-            background: #222;
-            padding: 20px;
-            border-radius: 15px;
-            transition: 0.3s;
-        }
+/* HOME */
+#home h2{
+    font-size:32px;
+    color:#ff003c;
+    text-shadow:0 0 15px red;
+}
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+/* BUTTON */
+button{
+    background:#ff003c;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+button:hover{
+    box-shadow:0 0 20px red;
+}
 
-        iframe {
-            width: 100%;
-            height: 400px;
-            border-radius: 15px;
-        }
+/* CARDS */
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(8px);
+    padding:15px;
+    border-radius:15px;
+    border:1px solid rgba(255,0,60,0.3);
+    transition:0.3s;
+}
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 25px red;
+}
+.card img{width:100%;border-radius:10px;}
 
-        footer {
-            border-top: 1px solid red;
-            padding: 15px;
-            color: gray;
-        }
-        footer{
-            text-align: center;
-        }
-    </style>
+.card-container{
+    display:grid;
+    gap:20px;
+}
+@media(min-width:768px){
+.card-container{grid-template-columns:repeat(3,1fr);}
+}
+
+/* GALLERY */
+.gallery img{
+    width:100%;
+    border-radius:10px;
+}
+.gallery img:hover{
+    box-shadow:0 0 20px red;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+}
+.stats h2{
+    color:#ff003c;
+}
+
+/* FOOTER */
+footer{
+    border-top:1px solid red;
+    text-align:center;
+    padding:15px;
+    color:gray;
+}
+
+/* 🔥 CURSOR GLOW */
+.glow{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#ff003c;
+    border-radius:50%;
+    pointer-events:none;
+    box-shadow:0 0 10px red, 0 0 20px red;
+    animation: fadeOut 0.5s linear;
+}
+
+@keyframes fadeOut{
+    from{opacity:1;}
+    to{opacity:0;}
+}
+
+iframe{border-radius:10px;}
+
+</style>
 </head>
 
 <body>
 
+<div id="particles-js"></div>
+
+<nav>
+<h1>TUNERACER</h1>
+<div class="hamburger">☰</div>
+
+<div class="menu">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#streams">Live</a>
+<a href="#videos">Videos</a>
+<a href="#gallery">Gallery</a>
+<a href="#stats">Stats</a>
+</div>
+</nav>
+
+<section id="home">
+<h2 id="typing"></h2>
+<p>High Speed Gaming | Valorant | Racing</p>
+<button onclick="scrollToLive()">Watch Live</button>
+</section>
+
+<section id="about">
+<h3 style="color:red;">About</h3>
+<p>TUNERACER is a gaming brand focused on competitive gameplay.</p>
+</section>
+
+<section id="streams">
+<h3 style="color:red;">Live Stream</h3>
+<p id="liveStatus"></p>
+
+<iframe width="100%" height="250"
+src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"></iframe>
+</section>
+
+<section id="videos">
+<h3 style="color:red;">Videos</h3>
+<div class="card-container">
+<div class="card" onclick="openVideo('https://youtube.com')">
+<img src="https://via.placeholder.com/300"><p>Video 1</p>
+</div>
+<div class="card" onclick="openVideo('https://youtube.com')">
+<img src="https://via.placeholder.com/300"><p>Video 2</p>
+</div>
+<div class="card" onclick="openVideo('https://youtube.com')">
+<img src="https://via.placeholder.com/300"><p>Video 3</p>
+</div>
+</div>
+</section>
+
+<section id="gallery">
+<h3 style="color:red;">Gallery</h3>
+<div class="card-container gallery">
+<img src="https://via.placeholder.com/300" onclick="emoji(event)">
+<img src="https://via.placeholder.com/300" onclick="emoji(event)">
+<img src="https://via.placeholder.com/300" onclick="emoji(event)">
+</div>
+</section>
+
+<section id="stats">
+<h3 style="color:red;">Stats</h3>
+<div class="stats">
+<div><h2 id="video">0</h2><p>Videos</p></div>
+<div><h2 id="subs">0</h2><p>Subscribers</p></div>
+</div>
+</section>
+
+<footer>© 2026 TUNERACER</footer>
+
 <script>
 
-// 🔥 Smooth Scroll
-document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", function(e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute("href"));
-        section.scrollIntoView({
-            behavior: "smooth"
-        });
-    });
+// 🔥 PARTICLES
+particlesJS("particles-js", {
+  particles:{
+    number:{value:80},
+    size:{value:3, random:true},
+    move:{speed:2},
+    line_linked:{enable:true, color:"#ff003c"}
+  }
 });
 
+// MENU
+document.querySelector(".hamburger").onclick=()=>{
+document.querySelector(".menu").classList.toggle("active");
+};
 
-// 🔥 Watch Live Button Action
-document.querySelector("button").addEventListener("click", () => {
-    document.querySelector("#streams").scrollIntoView({
-        behavior: "smooth"
-    });
+// SCROLL
+document.querySelectorAll("a").forEach(a=>{
+a.onclick=(e)=>{
+e.preventDefault();
+document.querySelector(a.getAttribute("href")).scrollIntoView({behavior:"smooth"});
+};
 });
 
+// LIVE
+document.getElementById("liveStatus").innerText =
+Math.random()>0.5 ? "🔴 LIVE NOW" : "⚫ OFFLINE";
 
-// 🔥 Card Click Animation + Alert
-document.querySelectorAll(".card").forEach((card, index) => {
-    card.addEventListener("click", () => {
-        alert("Opening Video " + (index + 1));
-    });
-});
+// VIDEO
+function openVideo(url){window.open(url,"_blank");}
 
-
-// 🔥 Navbar Color Change on Scroll
-window.addEventListener("scroll", () => {
-    const nav = document.querySelector("nav");
-    if (window.scrollY > 50) {
-        nav.style.background = "black";
-    } else {
-        nav.style.background = "transparent";
-    }
-});
-
-
-// 🔥 Typing Effect for Home Title
-const text = "WELCOME TO TUNERACER";
-let i = 0;
-const speed = 80;
-const heading = document.querySelector("#home h2");
-
-heading.innerHTML = "";
-
-function typeEffect() {
-    if (i < text.length) {
-        heading.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, speed);
-    }
+// EMOJI
+function emoji(e){
+let el=document.createElement("div");
+el.innerHTML="🔥";
+el.style.position="absolute";
+el.style.left=e.pageX+"px";
+el.style.top=e.pageY+"px";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),800);
 }
 
-typeEffect();
+// COUNTER
+function counter(id,max){
+let i=0;
+let x=setInterval(()=>{
+i+=5;
+document.getElementById(id).innerText=i;
+if(i>=max) clearInterval(x);
+},40);
+}
+counter("video",697);
+counter("subs",369);
+
+// SCROLL ANIMATION
+window.addEventListener("scroll",()=>{
+document.querySelectorAll("section").forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight-50){
+sec.classList.add("show");
+}
+});
+});
+
+// TYPING
+let text="WELCOME TO TUNERACER";
+let i=0;
+(function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i++);
+setTimeout(typing,70);
+}
+})();
+
+// BUTTON
+function scrollToLive(){
+document.querySelector("#streams").scrollIntoView({behavior:"smooth"});
+}
+
+// 🔥 CURSOR GLOW TRAIL
+document.addEventListener("mousemove",(e)=>{
+let glow=document.createElement("div");
+glow.className="glow";
+glow.style.left=e.pageX+"px";
+glow.style.top=e.pageY+"px";
+document.body.appendChild(glow);
+setTimeout(()=>glow.remove(),500);
+});
 
 </script>
-
-    <nav>
-        <h1>TUNERACER</h1>
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#streams">Live</a>
-            <a href="#videos">Videos</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <section id="home">
-        <h2>WELCOME TO TUNERACER</h2>
-        <p>High Speed Gaming | Valorant | Racing | Live Streams</p>
-        <button>Watch Live</button>
-    </section>
-
-    <section id="about">
-        <h3 style="color:red;">About</h3>
-        <p>
-            TUNERACER is a gaming brand focused on high-performance gameplay, 
-            competitive Valorant matches, and racing simulations.
-        </p>
-    </section>
-
-    <section id="streams" style="background:#111;">
-        <h3 style="color:red;">Live Stream</h3>
-        <iframe 
-            src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
-            allowfullscreen>
-        </iframe>
-    </section>
-
-    <section id="videos">
-        <h3 style="color:red;">Latest Videos</h3>
-
-        <div class="card-container">
-            <div class="card">Video 1</div>
-            <div class="card">Video 2</div>
-            <div class="card">Video 3</div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h3 style="color:red;">Contact</h3>
-        <p>Follow on YouTube, Instagram, Twitch</p>
-    </section>
-
-    <footer>
-        &copy; 2026 TUNERACER
-    </footer>
 
 </body>
 </html>
